@@ -1,3 +1,5 @@
+摘要
+> 本地化插件(Localization)的基本、拓展使用，以及解决TextMeshPro用一段时间后无法显示新的文字（显示为口口）的问题
 # 字库问题
 Unity最先进的文字解决方案TextMeshPro能同时满足在UI和场景中（自带一个Mesh）显示文字。它需要从普通字体文件(.ttf)中创建一个SDF文件作为TextMeshPro的字体。有两种创建方式：
 1. 右键ttf文件->Create->TextMeshPro->Font Asset
