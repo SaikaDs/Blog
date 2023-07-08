@@ -65,7 +65,8 @@ Window->Package Manager->Packages: Unity Registry->搜索并安装官方插件Lo
 <img src="images/%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8CTextMeshPro/8.png" width=500>
 </center>
 场景文本对象中的TextMeshPro并不是TextMeshProUGUI，所以才没有Localization这个选项。  
-这其实并不是什么大问题，我们可以手动添加Localize String Event这个组件到场景文本对象中，只是需要多一步操作：在Update String (String)中添加一项，把本Object拖入，下拉菜单中选择TextMeshPro.text。然后多语言文本就会应用到TextMeshPro的text上了。
+
+这其实并不是什么大问题，我们可以手动添加Localize String Event这个组件到场景文本对象中，只是需要多一步操作：在Update String (String)中添加一项，把本Object拖入，下拉菜单中选择TextMeshPro.text。然后多语言文本就会应用到TextMeshPro的text上了。至于右键菜单中的Localization选项，它只是把```添加Localize String Event组件，选择Object，选择目标TextMeshProUGUI.text```这系列操作集成了一下，做成了一键功能。
 
 <center>
 <img src="images/%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8CTextMeshPro/9.png" width=500>
