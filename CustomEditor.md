@@ -38,6 +38,7 @@ public class TouchAttack : MonoBehaviour
     }
 }
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(TouchAttack))]
 public class TouchAttackEditor : Editor
 {
@@ -53,7 +54,9 @@ public class TouchAttackEditor : Editor
         }
     }
 }
+# endif
 ```
 - 其中，target是内置的对象，应该就是表示装饰的目标对象，直接获取来是Object类型，因此需要做个转换。  
 - if (GUILayout.Button(""))这种写法有点像语法糖，应该是把Button设置和Button回调一起包含了，太酷了。之后详细了解下  
 - 实际测试下来，CustomEditor是可以与目标Monobehaviour处于同一个脚本文件里，省事了。
+- 注意需要添加# if UNITY_EDITOR条件编译，否则在build时会报错。原因应该是正式发布的包体里不能有Editor相关的代码，毕竟编辑器应该与游戏本体分离。
