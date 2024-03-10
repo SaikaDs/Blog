@@ -27,9 +27,10 @@ Window->Package Manager->Packages: Unity Registry->搜索并安装官方插件Lo
 ## 基本用法
 [参考来源](https://www.yii666.com/blog/377464.html?action=onAll)
 1. Edit > Project Settings > Localization
+2. 点Create创建一个setting文件
 2. Locale Generator中选择要使用的语言
 3. Window > Asset Management > Localization Tables->New Table Collection新建一个表格，注意勾选需要用到的语言，然后在Edit Table Collection中编写内容
-4. 在任意TextMeshPro组件上右键->Localization，在自动添加的Localize String Event中的String Reference中选择需要用到的文本的key
+4. 在任意TextMeshPro组件上右键->Localize，在自动添加的Localize String Event中的String Reference中选择需要用到的文本的key
 
 ## 问题：在场景中的TextMeshPro没有Localization这个选项
 问题的根源在于TextMeshPro在UI中和场景中应用的类是完全不同的两个类。  
@@ -150,3 +151,20 @@ string text = localizeString.GetLocalizedString();
 
 ### 拓展
 除了文字，本地化插件还提供了在不同语言设置下展示不同的图片、音效等，可以说是很全面了。等后续探索
+
+# 字体创建
+有了字库，和从网上下载的字体文件（.ttf），我们就可以利用这两个东西创建独属于本项目的字体资产了。
+1. 右键ttf文件->Create->TextMeshPro->Font Asset，会创建一个```<字体名> SDF```这样的文件，这个文件就是可以直接拖进TextMeshPro控件的字体文件，像材质一样。后面简称SDF
+2. 新建的SDF的字库是空的，可以在属性面板看到Character Table等都是空的。此时应用它，所有的汉字都是口口
+<center>
+<img src="images/%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8CTextMeshPro/BBWPT%60M$1TI5TH%7BWGYSR801.png" width=350>
+</center>
+3. 点击顶部的Update Atlas Texture，可以呼出Font Asset Creator面板
+<center>
+<img src="images/%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8CTextMeshPro/1I0L4HK%25B4D2%25M5HXQF1%25_C.png" width=350>
+</center>
+4. Character Set选择Characters from File，然后Character File选择自己导出的字库文件。点击Generate Font Atlas，字库就更新到SDF文件中了
+<center>
+<img src="images/%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8CTextMeshPro/1%20(2).png" width=300>
+</center>
+5. 此时该SDF文件可以正常使用，输入字库内的字都不会变成口口
