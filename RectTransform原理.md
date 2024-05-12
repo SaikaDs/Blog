@@ -24,7 +24,7 @@ RectTransform是专门为UI设计的类，它继承自Transform。
 </center>
 
 **anchoredPosition**  
-相对于基于锚点框中心的位置，设置了它就相当于设置了localPosition
+相对于基于锚点框中心的位置，设置了它就相当于设置了localPosition  
 **sizeDelta**  
 自身相对于锚点框的大小，采用**加算**    
 > 假设锚点框的尺寸为(50, 50)，sizeDelta为(10, 20)，则实际尺寸为(60, 70)
@@ -35,9 +35,9 @@ RectTransform是专门为UI设计的类，它继承自Transform。
 localPosition在面板中（debug模式）变成只读了，只能通过改变AnchoredPosition来改变它
 
 ### 延伸属性（实际上只是接口，它们与核心属性互相转换）
-**offsetMin和offsetMax**，表示自身四个边与锚点框四个边之间的像素距离
-面板中的**Left,Right,Top,Bottom**：它们其实就是offsetMin和offsetMax的另一种形式，在面板里常见，更易于理解
-面板中的**Width, Height, Pos X, Pos Y**：只有在锚点重合时，它们才有意义，见下文
+**offsetMin和offsetMax**，表示自身四个边与锚点框四个边之间的像素距离  
+面板中的**Left,Right,Top,Bottom**：它们其实就是offsetMin和offsetMax的另一种形式，在面板里常见，更易于理解，只有在锚点分离时，它们才显示  
+面板中的**Width, Height, Pos X, Pos Y**：只有在锚点重合时，它们才有意义，见下文  
 
 # 应用
 确定好核心属性后，RectTransform的自适应功能就完备了。  
@@ -45,7 +45,7 @@ localPosition在面板中（debug模式）变成只读了，只能通过改变An
 根据这一原则，可以总结出很多规律和用法：
 ### 尺寸自适应
 因为锚点框是**基于百分比的**，所以父亲的尺寸在变化时，锚点框的中心位置和尺寸也会变化。因此，系统为了保证sizeDelta和anchoredPosition不变，也会自动改变孩子的实际尺寸和位置 
-> 例如，当锚点框为(0.25, 0.25, 0.75, 0.75)，sizeDelta为(0, 0)时，孩子会一直保持尺寸为父亲的一半。且永远位于中央。  
+> 例如，当锚点框为(0.25, 0.25, 0.75, 0.75)，sizeDelta为(0, 0)时，孩子与锚点框完全一致，会一直保持尺寸为父亲的一半。且永远位于中央。  
 
 <center>
 <img src="images/RectTransform/GIF1.gif" width=350>
@@ -53,7 +53,7 @@ localPosition在面板中（debug模式）变成只读了，只能通过改变An
 
 又因为sizeDelta是**固定像素值**，所以可以利用它实现一些固定值相关的自适应
 > 例如，锚点框为(0, 0, 1, 1)，sizeDelta为(-50, -50)时，孩子会跟随父亲扩大缩小，并永远保持边缘有25像素的margin。
-> 可以直接通过预设面板选择右下角，然后把四维属性全都设为25即可。面板的作用正是以一种更易理解的方式提供设置核心属性的接口。
+> 直接通过预设面板选择右下角，然后把四维属性全都设为25即可。面板的作用正是以一种更易理解的方式提供设置核心属性的接口。
 
 <center>
 <img src="images/RectTransform/GIF2.gif" width=350>
@@ -63,6 +63,11 @@ localPosition在面板中（debug模式）变成只读了，只能通过改变An
 只要合理搭配固定像素的值（sizeDelta）和百分比的值（anchors），还可以满足很多同时要求固定距离和百分比距离的场合（具体例子暂时想不到了）
 ### 锚点框重合
 当锚点框的左右、上下重叠时，变成一根线乃至一个点时，锚点框的宽、高就变成0了。此时，sizeDelta就与其实际的尺寸相等，无论父亲的尺寸如何变化，锚点框的尺寸都是0，孩子的尺寸不会变化。  
+
+<center>
+<img src="images/RectTransform/6.png" width=200>
+</center>
+
 正是因此，当X，Y中的某一轴的min，max重合时，面板中的Width和Pos X（或Height和Pos Y）属性才会显示出来。因为这种情况下，设置尺寸和位置的效果就是立竿见影的了，不会被父亲的尺寸变化所影响。  
 <center>
 <img src="images/RectTransform/1.png" width=350>
